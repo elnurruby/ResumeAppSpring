@@ -32,6 +32,16 @@ public class UserEntityForm {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "UserEntityForm{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", nationalityID=" + nationalityID +
+                '}';
+    }
+
     public String getSurname() {
         return surname;
     }

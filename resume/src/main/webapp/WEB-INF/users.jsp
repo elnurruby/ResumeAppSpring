@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: elnur
@@ -9,7 +8,7 @@
   Time: 2:30 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -25,18 +24,20 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
+
 <head>
-    <script src="assets/js/index.js"></script>
     <title>user jsp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+    <script src="assets/js/index.js"></script>
+
     <div class="container">
         <a href="login" class="btn btn-info btn-lg log-out-button">
             <span class="glyphicon glyphicon-log-out"></span> Log out
         </a>
         <div>
-            <form:form action="users" method="GET" modelAttribute="user">
+            <form:form action="users" method="GET" modelAttribute="userGET">
                 <div class="form-group">
                     <label for="name">name:</label>
                     <input type="text" name="name" value="" class="form-control">
@@ -66,21 +67,21 @@
                         <td>${u.surname}</td>
                         <td>${u.nationalityId}</td>
                         <td>
-                            <form:form action="users" method="POST" modelAttribute="user">
-                                <input type="hidden" name="id" value="${u.id}">
+                            <form:form action="users" method="POST" modelAttribute="userPOST">
+                                <form:hidden path = "id" value = "${u.id}"/>
                                 <button type="button" class="btn btn-danger" data-toggle="modal" name="action"
                                         value="delete"
                                         data-target="#exampleModal" onclick=setIDinModal(${u.id})>
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             </form:form>
-                            <form action="users" method="post">
+                            <form:form action="users" method="POST" modelAttribute="userPOST">
                                 <input type="hidden" name="id" value="${u.id}">
                                 <button class="btn btn-secondary" type="submit" value="update" name="action">
                                     <i class="fas fa-pen-square"></i>
                                 </button>
-                            </form>
-                            <button class="btn btn-info" type="submit" class="btn btn-outline-info" value="info"
+                            </form:form>
+                            <button class="btn btn-info" type="submit"  value="info"
                                     name="action">
                                 <i class="fas fa-info"></i>
                             </button>
@@ -106,13 +107,13 @@
                         Are you sure about deleting the data?
                     </div>
                     <div class="modal-footer">
-                            <form:form action="users" method="GET" modelAttribute="user">
+                        <form:form action="users" method="POST" modelAttribute="userPOST">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
                             </button>
                             <input type="hidden" name="id" id="UserModalID" value="">
                             <button type="submit" class="btn btn-outline-danger" name="action" value="delete">Delete
                             </button>
-                            </form:form>
+                        </form:form>
                     </div>
                 </div>
             </div>
